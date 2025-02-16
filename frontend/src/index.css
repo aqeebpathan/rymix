@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-neutral-900 text-neutral-100;
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    @apply w-3;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-neutral-100/30 transition-colors duration-200;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-400/70;
+  }
+
+  .scrollbar-hidden {
+    @apply overflow-hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer utilities {
+  @keyframes songBarAnimation {
+    0%,
+    100% {
+      height: 40%;
+    }
+    50% {
+      height: 100%;
+    }
+  }
+
+  @keyframes songBarVariation {
+    0%,
+    100% {
+      height: 40%;
+    }
+    50% {
+      height: 100%;
+    }
+    75% {
+      height: 70%;
+    }
+  }
+}
+
+@layer utilities {
+  .animate-song-bar1 {
+    animation: songBarAnimation 1s infinite ease-in-out alternate;
+  }
+
+  .animate-song-bar2 {
+    animation: songBarVariation 1.2s infinite ease-in-out alternate 0.3s;
+  }
+
+  .animate-song-bar3 {
+    animation: songBarAnimation 1.4s infinite ease-in-out alternate 0.6s;
+  }
+
+  .animate-song-bar4 {
+    animation: songBarVariation 1.6s infinite ease-in-out alternate 0.9s;
+  }
+
+  .animate-song-bar5 {
+    animation: songBarAnimation 1.8s infinite ease-in-out alternate 1.2s;
+  }
+}
+
+@layer components {
+  .control-btn {
+    @apply text-neutral-400 transition active:scale-90 active:text-neutral-400 will-change-transform;
+  }
+}
