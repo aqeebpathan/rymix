@@ -7,11 +7,12 @@ import ScrollArea from "../../components/ScrollArea";
 import useMusicStore from "../../stores/useMusicStore";
 import usePlayerStore from "../../stores/usePlayerStore";
 import DynamicGradient from "./components/DynamicGradient";
+import AlbumPageSkeleton from "./components/AlbumPageSkeleton";
 import SongPlayingAnimation from "./components/SongPlayingAnimation";
 
 const AlbumPage = () => {
   const { albumId } = useParams();
-  const { fetchAlbumById, currentAlbum } = useMusicStore();
+  const { fetchAlbumById, currentAlbum, isLoading } = useMusicStore();
   const { currentSong, isPlaying, playAlbum, togglePlay } = usePlayerStore();
 
   useEffect(() => {
@@ -35,7 +36,11 @@ const AlbumPage = () => {
     playAlbum(currentAlbum?.songs, index);
   };
 
-  if (!currentAlbum) {
+  if (isLoading) {
+    return <AlbumPageSkeleton />;
+  }
+
+  if (!isLoading && !currentAlbum) {
     return <NotFoundPage />;
   }
 
