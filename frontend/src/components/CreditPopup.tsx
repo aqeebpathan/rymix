@@ -1,19 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 const CreditPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+
+  const isLoginOrSignup =
+    location.pathname === "/login" || location.pathname === "/signup";
 
   useEffect(() => {
+    if (isLoginOrSignup) return;
+
     const isClosed = localStorage.getItem("popupClosed");
     if (!isClosed) {
       const timer = setTimeout(() => {
         setIsVisible(true);
-      }, 5000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [isLoginOrSignup]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -36,7 +42,7 @@ const CreditPopup = () => {
 
   return (
     <>
-      {isVisible && (
+      {isVisible && !isLoginOrSignup && (
         <div className="fixed inset-0 bg-neutral-900/50 backdrop-blur-sm flex justify-center items-center z-50">
           <div
             ref={popupRef}
