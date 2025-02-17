@@ -12,6 +12,7 @@ import useAuthStore from "./stores/useAuthStore";
 import NotFoundPage from "./pages/404/NotFoundPage";
 import ProtectedAdminRoute from "./hoc/ProtectAdminRoute";
 import CreditPopup from "./components/CreditPopup";
+import CreditsPage from "./pages/credits/CreditsPage";
 
 function App() {
   const { checkAuth, user } = useAuthStore();
@@ -46,6 +47,8 @@ function App() {
           <Route path="/albums/:albumId" element={<AlbumPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
+
+        <Route path="/credits" element={<CreditsPage />} />
       </Routes>
 
       <Toaster richColors position="top-center" />
