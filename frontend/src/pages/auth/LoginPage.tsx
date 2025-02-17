@@ -48,12 +48,12 @@ const LoginPage = () => {
             </button>
 
             <p className="text-sm text-neutral-400">
-              Didnt have an account?{" "}
+              Don’t have an account?{" "}
               <Link
                 to="/signup"
                 className="hover:text-[#fafafa] transition-colors"
               >
-                Signup
+                Sign up
               </Link>
             </p>
           </form>

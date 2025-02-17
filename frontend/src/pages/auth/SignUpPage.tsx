@@ -61,7 +61,7 @@ const SignUpPage = () => {
                 to="/login"
                 className="hover:text-[#fafafa] transition-colors"
               >
-                Login
+                Log in
               </Link>
             </p>
           </form>
