@@ -37,7 +37,9 @@ const Sidebar = () => {
           <h2 className="font-bold tracking-tight">
             Start your first playlist
           </h2>
-          <p className="text-sm tracking-tight mt-1">It's simple, and easy.</p>
+          <p className="text-sm tracking-tight mt-1">
+            It's simple, and easy to create.
+          </p>
 
           <button
             onClick={handleCreatePlaylist}
