@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import useMusicStore from "../stores/useMusicStore";
 import { AlignStartVertical, Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { fetchAlbums } = useMusicStore();
@@ -49,7 +50,16 @@ const Sidebar = () => {
 
       {/* Footer Disclaimer & Tech Stack */}
       <div className="text-xs p-3 text-neutral-500 font-medium space-y-3 leading-tight pt-8">
-        <p>© All songs belong to their respective owners.</p>
+        <p>
+          © All songs belong to their respective owners.{" "}
+          <Link
+            to="/credits"
+            target="_blank"
+            className="hover:text-neutral-50 transition-colors"
+          >
+            Music credits
+          </Link>
+        </p>
         <p>
           Built with <span>React, Zustand, Node.js, Express, Cloudinary</span>.
         </p>
