@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  Repeat,
   Shuffle,
   SkipBack,
   SkipForward,
@@ -11,6 +10,7 @@ import {
 import usePlayerStore from "../stores/usePlayerStore";
 import VolumeControl from "./components/VolumeControl";
 import ProgressSlider from "./components/ProgressSlider";
+import AddSongToPlaylistBtn from "../pages/playlist/components/AddSongToPlaylistBtn";
 
 const PlaybackControls = () => {
   const { currentSong, isPlaying, togglePlay, playNext, playPrevious } =
@@ -62,7 +62,7 @@ const PlaybackControls = () => {
         {/* Player Controls */}
         <div className="flex flex-col-reverse sm:flex-col items-center gap-2 flex-1 w-full max-w-full sm:max-w-[45%]">
           <div className="flex items-center gap-4 sm:gap-6 justify-evenly w-full sm:w-fit">
-            <button className="control-btn">
+            <button className="text-neutral-400 control-btn cursor-pointer">
               <Shuffle className="size-5" />
             </button>
 
@@ -72,7 +72,7 @@ const PlaybackControls = () => {
               onClick={playPrevious}
               disabled={!currentSong}
             >
-              <SkipBack className="size-5 cursor-pointer mr-1" fill="#171717" />
+              <SkipBack className="size-5 cursor-pointer mr-1" fill="#fafafa" />
             </button>
 
             {/* Play/Pause Button */}
@@ -99,13 +99,13 @@ const PlaybackControls = () => {
               onClick={playNext}
               disabled={!currentSong}
             >
-              <SkipForward className="size-5 cursor-pointer" />
+              <SkipForward className="size-5 cursor-pointer" fill="#fafafa" />
             </button>
 
-            {/* Repeat Button */}
-            <button className="control-btn" disabled={!currentSong}>
-              <Repeat className="size-5 ml-1" />
-            </button>
+            {/* add to playlist btn */}
+            {currentSong?._id && (
+              <AddSongToPlaylistBtn songId={currentSong?._id} />
+            )}
           </div>
 
           {/* Progress Slider */}

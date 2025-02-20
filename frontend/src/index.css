@@ -3,7 +3,7 @@
 
 @layer base {
   body {
-    @apply bg-neutral-900 text-neutral-100;
+    @apply bg-neutral-950 text-neutral-100;
 
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -88,6 +88,6 @@
 
 @layer components {
   .control-btn {
-    @apply text-neutral-400 transition active:scale-90 active:text-neutral-400 will-change-transform;
+    @apply text-neutral-50 transition active:scale-90 will-change-transform;
   }
 }

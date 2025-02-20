@@ -67,7 +67,7 @@ const HomePage = () => {
 
         <footer className="px-4 md:px-6">
           <div className="border-t border-neutral-800 py-12 text-neutral-500 font-medium tracking-tight text-[15px] leading-tight">
-            <p className="mb-1">
+            <p className=" mb-2 md:mb-1">
               © {new Date().getFullYear()} All rights to music belong to their
               respective owners.
             </p>

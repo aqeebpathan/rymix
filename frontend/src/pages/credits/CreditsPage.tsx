@@ -51,14 +51,14 @@ const CreditsPage = () => {
           ))}
         </div>
 
-        <footer className="text-[14px] text-neutral-500 mt-6 mb-4 leading-tight px-4">
+        <footer className="text-[14px] text-neutral-500 mt-6 mb-4 leading-tight md:px-4">
           <p>
             The audio tracks on this platform are embedded directly from
             NoCopyrightSounds (NCS), ensuring proper attribution to the original
             creators. For more information on the artists and their work, please
             visit the respective NCS track pages.
           </p>
-          <p className="mt-2">
+          <p className="mt-3">
             If you notice any inaccuracies in the artist names or links, please
             let us know, and we will update the information accordingly.
           </p>
