@@ -13,7 +13,7 @@ import SongPlayingAnimation from "./components/SongPlayingAnimation";
 const AlbumPage = () => {
   const { albumId } = useParams();
   const { fetchAlbumById, currentAlbum, isLoading } = useMusicStore();
-  const { currentSong, isPlaying, playAlbum, togglePlay } = usePlayerStore();
+  const { currentSong, isPlaying, playQueue, togglePlay } = usePlayerStore();
 
   useEffect(() => {
     fetchAlbumById(albumId!);
@@ -27,13 +27,13 @@ const AlbumPage = () => {
     );
 
     if (isCurrentAlbumPlaying) togglePlay();
-    else playAlbum(currentAlbum?.songs, 0);
+    else playQueue(currentAlbum?.songs, 0);
   };
 
   const handlePlaySong = (index: number) => {
     if (!currentAlbum) return;
 
-    playAlbum(currentAlbum?.songs, index);
+    playQueue(currentAlbum?.songs, index);
   };
 
   if (isLoading) {
