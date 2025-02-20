@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import PlaybackControls from "./PlaybackControls";
 import usePlayerStore from "../stores/usePlayerStore";
+import MobileNavigation from "../components/MobileNavigation";
 
 const MainLayout = () => {
   const { currentSong } = usePlayerStore();
@@ -29,6 +30,8 @@ const MainLayout = () => {
 
       {/* Playback Controls */}
       {currentSong && <PlaybackControls />}
+
+      <MobileNavigation />
     </div>
   );
 };
