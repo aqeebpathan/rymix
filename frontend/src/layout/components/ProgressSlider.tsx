@@ -6,7 +6,7 @@ interface ProgressSliderProps {
 
 export default function ProgressSlider({ audio }: ProgressSliderProps) {
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(100);
+  const [duration, setDuration] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -19,16 +19,22 @@ export default function ProgressSlider({ audio }: ProgressSliderProps) {
       if (!isSeeking) setCurrentTime(audio.currentTime);
     };
 
-    const updateDuration = () => setDuration(audio.duration || 100);
+    const updateDuration = () => {
+      if (audio.duration && !isNaN(audio.duration)) {
+        setDuration(audio.duration);
+      }
+    };
 
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("loadedmetadata", updateDuration);
     audio.addEventListener("durationchange", updateDuration);
+    audio.addEventListener("canplay", updateDuration);
 
     return () => {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("loadedmetadata", updateDuration);
       audio.removeEventListener("durationchange", updateDuration);
+      audio.removeEventListener("canplay", updateDuration);
     };
   }, [audio, isSeeking]);
 
@@ -81,18 +87,21 @@ export default function ProgressSlider({ audio }: ProgressSliderProps) {
           onChange={handleSeek}
           disabled={isDisabled}
           className="w-full h-4 opacity-0 appearance-none cursor-grab absolute -mt-2.5"
+          style={{
+            zIndex: 10,
+          }}
         />
 
         {/* Seek thumb (visible when hovering or dragging) */}
         <div
-          className={`absolute top-1/2 w-3 h-3 bg-white rounded-full transform -translate-y-1/2 transition-opacity duration-200 ${
+          className={`absolute top-1/2 w-3 h-3 bg-neutral-50 rounded-full transform -translate-y-1/2 transition-opacity duration-200 ${
             isHovered || isSeeking ? "opacity-100 scale-110" : "opacity-0"
           }`}
           style={{ left: `calc(${(currentTime / duration) * 100}% - 6px)` }}
         />
       </div>
 
-      <span className="text-xs text-neutral-300 w-10 font-mono font-medium ">
+      <span className="text-xs text-neutral-300 w-10 font-mono font-medium">
         {formatTime(duration)}
       </span>
     </div>
