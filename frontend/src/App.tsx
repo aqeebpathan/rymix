@@ -9,10 +9,12 @@ import AlbumPage from "./pages/album/AlbumPage";
 import AdminPage from "./pages/admin/AdminPage";
 import SignUpPage from "./pages/auth/SignUpPage";
 import useAuthStore from "./stores/useAuthStore";
-import NotFoundPage from "./pages/404/NotFoundPage";
-import ProtectedAdminRoute from "./hoc/ProtectAdminRoute";
 import CreditPopup from "./components/CreditPopup";
+import NotFoundPage from "./pages/404/NotFoundPage";
 import CreditsPage from "./pages/credits/CreditsPage";
+import LibraryPage from "./pages/library/LibraryPage";
+import PlaylistPage from "./pages/playlist/PlaylistPage";
+import ProtectedAdminRoute from "./hoc/ProtectAdminRoute";
 
 function App() {
   const { checkAuth, user } = useAuthStore();
@@ -45,6 +47,9 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/albums/:albumId" element={<AlbumPage />} />
+          <Route path="/playlists/:playlistId" element={<PlaylistPage />} />
+          <Route path="/library" element={<LibraryPage />} />
+
           <Route path="*" element={<NotFoundPage />} />
         </Route>
 

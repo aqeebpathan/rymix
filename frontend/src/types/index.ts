@@ -34,3 +34,10 @@ export interface User {
   isVerified: boolean;
   role: "admin" | "user";
 }
+
+export interface Playlist {
+  _id: string;
+  name: string;
+  isPublic: boolean;
+  songs: Song[];
+}
