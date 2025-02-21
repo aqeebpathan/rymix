@@ -1,7 +1,8 @@
+import { toast } from "sonner";
 import { create } from "zustand";
+
 import { Playlist } from "../types";
 import { AxiosInstance } from "../lib/axios";
-import { toast } from "sonner";
 
 interface PlaylistState {
   playlists: Playlist[];
@@ -44,8 +45,8 @@ const usePlaylistStore = create<PlaylistState>((set) => ({
       const newPlaylist = res.data.data;
       set((state) => ({ playlists: [...state.playlists, newPlaylist] }));
       toast.success(res.data.message);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
     } finally {
       set({ isLoading: false });
     }
