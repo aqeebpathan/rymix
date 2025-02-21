@@ -55,8 +55,12 @@ const PlaylistModal = () => {
             placeholder="Playlist name"
             value={name}
             onChange={handleNameChange}
-            className="w-full text-white text-3xl outline-none border-neutral-500 border-b-2 pb-2 placeholder:text-neutral-500 font-bold"
+            disabled={loading}
+            className={`w-full text-white text-3xl outline-none border-neutral-500 border-b-2 pb-2 placeholder:text-neutral-500 font-bold ${
+              loading ? "caret-transparent" : ""
+            }`}
           />
+
           <label className="flex items-center text-white text-sm cursor-pointer mt-1">
             <input
               type="checkbox"
