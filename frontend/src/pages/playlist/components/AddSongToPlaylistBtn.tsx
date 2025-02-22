@@ -26,7 +26,7 @@ const AddSongToPlaylistBtn = ({ songId }: { songId: string }) => {
   return (
     <div className="relative flex items-center justify-center">
       {isDropdownOpen && (
-        <div className="absolute right-0 md:right-auto bottom-[160%] w-48 bg-neutral-300 border border-neutral-400 z-50 text-neutral-950 px-2 py-2 rounded shadow-2xl drop-shadow-2xl">
+        <div className="absolute right-0 md:right-auto bottom-[160%] w-48 max-h-40 overflow-y-scroll bg-neutral-300 border border-neutral-400 z-50 text-neutral-950 px-2 py-2 rounded shadow-2xl drop-shadow-2xl scrollbar-hidden">
           <h3 className="font-extrabold text-lg mb-1 pl-1">Add to Playlist</h3>
           {playlists.length > 0 ? (
             playlists.map((playlist) => (
