@@ -18,6 +18,8 @@ interface PlaylistState {
 
   openCreateModal: () => void;
   closeCreateModal: () => void;
+
+  reset: () => void;
 }
 
 const usePlaylistStore = create<PlaylistState>((set) => ({
@@ -109,6 +111,8 @@ const usePlaylistStore = create<PlaylistState>((set) => ({
 
   openCreateModal: () => set({ isCreateModalOpen: true }),
   closeCreateModal: () => set({ isCreateModalOpen: false }),
+
+  reset: () => set({ playlists: [] }),
 }));
 
 export default usePlaylistStore;

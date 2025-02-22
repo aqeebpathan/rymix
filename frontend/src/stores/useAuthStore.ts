@@ -3,6 +3,7 @@ import { create } from "zustand";
 
 import { User } from "../types";
 import { AxiosInstance } from "../lib/axios";
+import usePlaylistStore from "./usePlaylistStore";
 
 interface AuthState {
   user: User | null;
@@ -77,6 +78,7 @@ const useAuthStore = create<AuthState & AuthActions>((set) => ({
     try {
       const res = await AxiosInstance.post("/auth/logout");
       set({ user: null, isAuthenticated: false });
+      usePlaylistStore.getState().reset(); // reset user playlists state
       toast.success(res.data.message);
     } catch (error: unknown) {
       const errorMessage =
