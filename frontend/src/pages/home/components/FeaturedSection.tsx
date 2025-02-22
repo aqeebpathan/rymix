@@ -1,21 +1,19 @@
-import { useEffect } from "react";
 import PlayButton from "./PlayButton";
-import useMusicStore from "../../../stores/useMusicStore";
+import { Song } from "../../../types";
 
-const FeaturedSection = () => {
-  const { isLoading, fetchFeaturedSongs, featuredSongs } = useMusicStore();
+type FeaturedSectionProps = {
+  songs: Song[];
+  isLoading: boolean;
+};
 
-  useEffect(() => {
-    fetchFeaturedSongs();
-  }, [fetchFeaturedSongs]);
-
+const FeaturedSection = ({ songs, isLoading }: FeaturedSectionProps) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
       {isLoading
         ? Array.from({ length: 6 }).map((_, index) => (
             <SkeletonCard key={index} />
           ))
-        : featuredSongs.map((song) => (
+        : songs.map((song) => (
             <div
               key={song._id}
               className="flex items-center bg-neutral-500/10 backdrop-blur-lg rounded-md overflow-hidden hover:bg-neutral-500/60 transition-colors group cursor-pointer relative"

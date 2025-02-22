@@ -1,31 +1,32 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import Clock from "./components/Clock";
 import SectionGrid from "./components/SectionGrid";
 import ScrollArea from "../../components/ScrollArea";
 import useMusicStore from "../../stores/useMusicStore";
-import FeaturedSection from "./components/FeaturedSection";
-// import usePlayerStore from "../../stores/usePlayerStore";
 import AlbumsSection from "./components/AlbumsSection";
+import FeaturedSection from "./components/FeaturedSection";
 import DynamicGreeting from "./components/DynamicGreeting";
-import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const {
     fetchTrendingSongs,
     fetchMadeForYouSongs,
+    fetchFeaturedSongs,
     madeForYouSongs,
     trendingSongs,
-    // featuredSongs,
+    featuredSongs,
     isLoading,
   } = useMusicStore();
 
   // const { initializeQueue } = usePlayerStore();
 
   useEffect(() => {
-    fetchMadeForYouSongs();
+    fetchFeaturedSongs();
     fetchTrendingSongs();
-  }, [fetchMadeForYouSongs, fetchTrendingSongs]);
+    fetchMadeForYouSongs();
+  }, [fetchMadeForYouSongs, fetchTrendingSongs, fetchFeaturedSongs]);
 
   // useEffect(() => {
   //   if (
@@ -47,7 +48,7 @@ const HomePage = () => {
             <Clock />
           </div>
 
-          <FeaturedSection />
+          <FeaturedSection songs={featuredSongs} isLoading={isLoading} />
 
           <AlbumsSection />
 
