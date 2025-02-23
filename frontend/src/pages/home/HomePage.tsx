@@ -11,6 +11,7 @@ import DynamicGreeting from "./components/DynamicGreeting";
 
 const HomePage = () => {
   const {
+    fetchSongs,
     fetchTrendingSongs,
     fetchMadeForYouSongs,
     fetchFeaturedSongs,
@@ -26,7 +27,13 @@ const HomePage = () => {
     fetchFeaturedSongs();
     fetchTrendingSongs();
     fetchMadeForYouSongs();
-  }, [fetchMadeForYouSongs, fetchTrendingSongs, fetchFeaturedSongs]);
+    fetchSongs();
+  }, [
+    fetchMadeForYouSongs,
+    fetchTrendingSongs,
+    fetchFeaturedSongs,
+    fetchSongs,
+  ]);
 
   // useEffect(() => {
   //   if (
