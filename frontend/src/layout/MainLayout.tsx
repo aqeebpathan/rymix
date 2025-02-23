@@ -6,11 +6,13 @@ import Sidebar from "../components/Sidebar";
 import PlaybackControls from "./PlaybackControls";
 import usePlayerStore from "../stores/usePlayerStore";
 import MobileNavigation from "../components/MobileNavigation";
+import VoiceControl from "./VoiceControl";
 
 const MainLayout = () => {
   const { currentSong } = usePlayerStore();
   return (
     <div className="bg-neutral-950 text-neutral-50 h-screen flex flex-col">
+      <VoiceControl />
       {/* Audio Player */}
       <AudioPlayer />
 
