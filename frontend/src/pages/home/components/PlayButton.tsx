@@ -16,10 +16,10 @@ const PlayButton = ({ song }: { song: Song }) => {
   return (
     <button
       onClick={handlePlay}
-      className={`absolute p-2 rounded-md bottom-5 sm:bottom-3 right-3 bg-neutral-200 text-neutral-900 hover:bg-neutral-100 hover:scale-105 transition-all opacity-100 translate-y-2 sm:opacity-0 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 cursor-pointer  ${
+      className={`absolute p-2 rounded-md bottom-5 sm:bottom-3 right-3 bg-neutral-200 text-neutral-900 hover:bg-neutral-100 hover:scale-105 transition-all opacity-100 sm:opacity- sm:group-hover:opacity-100 sm:group-hover:translate-y-0 cursor-pointer ${
         isCurrentSong
-          ? "opacity-100"
-          : "sm:opacity-0 sm:group-hover:opacity-100"
+          ? "opacity-100 !bottom-3 sm:bottom-3"
+          : "sm:opacity-0 sm:group-hover:opacity-100 translate-y-2"
       }`}
     >
       {isCurrentSong && isPlaying ? (
