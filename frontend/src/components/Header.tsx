@@ -1,11 +1,25 @@
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { CircleUser } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import useAuthStore from "../stores/useAuthStore";
+import useMusicStore from "../stores/useMusicStore";
 
 const Header = () => {
+  const [randomSong, setRandomSong] = useState("a song");
+  const { fetchSongTitles, songTitles } = useMusicStore();
   const { user, isAuthenticated, isCheckingAuth, logout } = useAuthStore();
+
+  useEffect(() => {
+    fetchSongTitles();
+  }, [fetchSongTitles]);
+
+  useEffect(() => {
+    if (songTitles.length > 0) {
+      setRandomSong(songTitles[Math.floor(Math.random() * songTitles.length)]);
+    }
+  }, [songTitles]);
 
   const handleProfileClick = () => {
     const greetings = [
@@ -34,10 +48,21 @@ const Header = () => {
           <img src="/logo.png" alt="Rymix logo" className="w-8" /> Rymix
         </Link>
 
+        <div className="hidden sm:inline">
+          <h3 className="text-neutral-50 font-medium">
+            <span className="italic font-normal text-neutral-400 text-sm mr-px">
+              Try saying:
+            </span>{" "}
+            Hey Rymix, play <span className="text-neutral-400">'</span>
+            {randomSong}
+            <span className="text-neutral-400">'</span>
+          </h3>
+        </div>
+
         {isCheckingAuth ? (
           <></>
         ) : (
-          <div className="font-semibold flex items-center space-x-4 text-sm">
+          <div className="font-semibold flex items-center space-x-4 text-sm min-w-[129px] justify-end">
             {isAuthenticated ? (
               <>
                 <button
