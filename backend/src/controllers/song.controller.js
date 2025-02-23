@@ -84,3 +84,17 @@ export const getTrendingSongs = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getSongTitles = async (req, res, next) => {
+  try {
+    const titles = await Song.find({}, "title");
+
+    return AppResponse.success(
+      res,
+      "Fetched song titles",
+      titles.map((song) => song.title)
+    );
+  } catch (error) {
+    next(error);
+  }
+};
