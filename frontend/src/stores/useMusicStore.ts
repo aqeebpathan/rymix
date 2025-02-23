@@ -13,6 +13,7 @@ interface MusicStore {
   madeForYouSongs: Song[];
   trendingSongs: Song[];
   stats: Stats;
+  songTitles: string[];
 
   fetchAlbums: () => Promise<void>;
   fetchAlbumById: (id: string) => Promise<void>;
@@ -23,6 +24,7 @@ interface MusicStore {
   fetchSongs: () => Promise<void>;
   deleteSong: (id: string) => Promise<void>;
   deleteAlbum: (id: string) => Promise<void>;
+  fetchSongTitles: () => Promise<void>;
 }
 
 const useMusicStore = create<MusicStore>((set) => ({
@@ -39,6 +41,7 @@ const useMusicStore = create<MusicStore>((set) => ({
     totalAlbums: 0,
     totalArtists: 0,
   },
+  songTitles: [],
 
   fetchSongs: async () => {
     set({ isLoading: true });
@@ -158,6 +161,18 @@ const useMusicStore = create<MusicStore>((set) => ({
       toast.success(res.data.message);
     } catch (error) {
       console.log(error);
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
+  fetchSongTitles: async () => {
+    set({ isLoading: true });
+    try {
+      const res = await AxiosInstance.get("/songs/titles");
+      set({ songTitles: res.data.data });
+    } catch (error: any) {
+      return error;
     } finally {
       set({ isLoading: false });
     }
