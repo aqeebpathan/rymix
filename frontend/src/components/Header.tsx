@@ -1,13 +1,13 @@
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { CircleUser } from "lucide-react";
+import { CircleUser, Ellipsis } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import useAuthStore from "../stores/useAuthStore";
 import useMusicStore from "../stores/useMusicStore";
 
 const Header = () => {
-  const [randomSong, setRandomSong] = useState("a song");
+  const [randomSong, setRandomSong] = useState<string | null>(null);
   const { fetchSongTitles, songTitles } = useMusicStore();
   const { user, isAuthenticated, isCheckingAuth, logout } = useAuthStore();
 
@@ -49,48 +49,55 @@ const Header = () => {
         </Link>
 
         <div className="hidden sm:inline">
-          <h3 className="text-neutral-50 font-medium">
+          <h3 className="text-neutral-50 font-medium flex gap-1 items-center">
             <span className="italic font-normal text-neutral-400 text-sm mr-px">
               Try saying:
-            </span>{" "}
-            Hey Rymix, play <span className="text-neutral-400">'</span>
-            {randomSong}
-            <span className="text-neutral-400">'</span>
+            </span>
+            Hey Rymix, play
+            {randomSong ? (
+              <>
+                <span>'{randomSong}'</span>
+              </>
+            ) : (
+              <Ellipsis className="animate-pulse size-7 -ml-px mt-px" />
+            )}
           </h3>
         </div>
 
-        {isCheckingAuth ? (
-          <></>
-        ) : (
-          <div className="font-semibold flex items-center space-x-4 text-sm min-w-[129px] justify-end">
-            {isAuthenticated ? (
-              <>
-                <button
-                  onClick={() => logout()}
-                  className="text-neutral-400 cursor-pointer mr-4"
-                >
-                  Logout
-                </button>
-                <CircleUser
-                  className="size-7 text-neutral-100 cursor-pointer hover:opacity-85 transition-all"
-                  onClick={handleProfileClick}
-                />
-              </>
-            ) : (
-              <>
-                <Link to="/signup" className="text-neutral-400">
-                  Sign up
-                </Link>
-                <Link
-                  to="/login"
-                  className="bg-neutral-100 text-neutral-950 py-3 px-7 rounded-full font-bold cursor-pointer"
-                >
-                  Log in
-                </Link>
-              </>
-            )}
-          </div>
-        )}
+        <div className="min-w-[129px]">
+          {isCheckingAuth ? (
+            <></>
+          ) : (
+            <div className="flex items-center space-x-4 font-semibold text-sm justify-end">
+              {isAuthenticated ? (
+                <>
+                  <button
+                    onClick={() => logout()}
+                    className="text-neutral-400 cursor-pointer mr-4"
+                  >
+                    Logout
+                  </button>
+                  <CircleUser
+                    className="size-7 text-neutral-100 cursor-pointer hover:opacity-85 transition-all"
+                    onClick={handleProfileClick}
+                  />
+                </>
+              ) : (
+                <>
+                  <Link to="/signup" className="text-neutral-400">
+                    Sign up
+                  </Link>
+                  <Link
+                    to="/login"
+                    className="bg-neutral-100 text-neutral-950 py-3 px-7 rounded-full font-bold cursor-pointer"
+                  >
+                    Log in
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
